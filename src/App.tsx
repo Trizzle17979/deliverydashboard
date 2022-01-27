@@ -1,13 +1,19 @@
 import React from "react";
-import Hero from "./components/Hero";
 import NavBar from "./components/NavBar";
+import MainPage from "./components/loggedOut/MainPage";
+import Dashboard from "./components/loggedIn/Dashboard";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="bg-blue-900">
+    <Router>
       <NavBar />
-      <Hero />
-    </div>
+
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<MainPage />} />
+      </Routes>
+    </Router>
   );
 }
 
