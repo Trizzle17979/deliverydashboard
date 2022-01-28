@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import Hero from "./Hero";
 import LearnMore from "./LearnMore";
 
 const MainPage = () => {
+  const learnMoreSection = useRef<HTMLDivElement>(null);
   return (
     <>
-      <Hero />
-      <LearnMore />
+      <Hero learnMoreSection={learnMoreSection} />
+      <LearnMore learnMoreSection={learnMoreSection} />
     </>
   );
 };
