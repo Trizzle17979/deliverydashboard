@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import TableDetails from "./TableDetails";
 
-function DashboardTable() {
-  const [showModal, setShowModal] = useState(false);
+const DashboardTable: React.FC = () => {
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleShowModal = () => {
     setShowModal(true);
@@ -68,6 +68,6 @@ function DashboardTable() {
       <TableDetails showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
-}
+};
 
 export default DashboardTable;

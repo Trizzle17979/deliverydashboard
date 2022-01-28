@@ -4,7 +4,7 @@ import MainPage from "./components/loggedOut/MainPage";
 import Dashboard from "./components/loggedIn/Dashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-function App() {
+const App: React.FC = () => {
   return (
     <Router>
       <NavBar />
@@ -15,6 +15,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;

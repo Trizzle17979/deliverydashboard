@@ -1,6 +1,6 @@
 import React from "react";
 
-function DashboardHome() {
+const DashboardHome: React.FC = () => {
   return (
     <div className="space-y-4 flex flex-col items-center">
       <h2 className="text-2xl mb-8">Home Dashboard</h2>
@@ -53,6 +53,6 @@ function DashboardHome() {
       </div>
     </div>
   );
-}
+};
 
 export default DashboardHome;

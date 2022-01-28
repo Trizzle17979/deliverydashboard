@@ -1,11 +1,14 @@
 import React, { useRef } from "react";
 
-function AddDelivery(props: boolean) {
-  const { showModal, setShowModal } = props;
+interface Props {
+  showModal: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  const modalRef = useRef();
+const AddDelivery: React.FC<Props> = ({ showModal, setShowModal }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
 
-  const closeModal = (e) => {
+  const closeModal = (e: React.FormEvent) => {
     if (modalRef.current === e.target) {
       setShowModal(false);
     }
@@ -91,6 +94,6 @@ function AddDelivery(props: boolean) {
       ) : null}
     </>
   );
-}
+};
 
 export default AddDelivery;

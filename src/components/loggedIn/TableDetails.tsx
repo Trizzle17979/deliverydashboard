@@ -1,11 +1,14 @@
 import React, { useRef } from "react";
 
-function TableDetails(props: boolean) {
-  const { showModal, setShowModal } = props;
+interface Props {
+  showModal: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  const modalRef = useRef();
+const TableDetails: React.FC<Props> = ({ showModal, setShowModal }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
 
-  const closeModal = (e) => {
+  const closeModal = (e: React.FormEvent) => {
     if (modalRef.current === e.target) {
       setShowModal(false);
     }
@@ -59,6 +62,6 @@ function TableDetails(props: boolean) {
       ) : null}
     </>
   );
-}
+};
 
 export default TableDetails;

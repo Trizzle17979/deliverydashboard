@@ -1,7 +1,7 @@
 import React from "react";
 
-function DashboardAnalytics() {
+const DashboardAnalytics: React.FC = () => {
   return <div className="">ANALYTICS DASHBOARD</div>;
-}
+};
 
 export default DashboardAnalytics;

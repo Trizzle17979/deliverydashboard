@@ -5,8 +5,14 @@ import DashboardHome from "./DashboardHome";
 import DashboardAnalytics from "./DashboardAnalytics";
 import DashboardTable from "./DashboardTable";
 
-const Dashboard = () => {
-  const [show, setShow] = useState({
+interface Show {
+  home: boolean;
+  analytics: boolean;
+  table: boolean;
+}
+
+const Dashboard: React.FC = () => {
+  const [show, setShow] = useState<Show>({
     home: true,
     analytics: false,
     table: false,

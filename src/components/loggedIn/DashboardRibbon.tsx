@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import AddDelivery from "./AddDelivery";
 
-function DashboardRibbon() {
-  const [showModal, setShowModal] = useState(false);
+const DashboardRibbon: React.FC = () => {
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleShowModal = () => {
     setShowModal(!showModal);
@@ -18,7 +18,7 @@ function DashboardRibbon() {
       <AddDelivery showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
-}
+};
 
 export default DashboardRibbon;
 // <div className="col-start-1 col-end-5 row-start-1 row-end-2 justify-self-end self-center">
