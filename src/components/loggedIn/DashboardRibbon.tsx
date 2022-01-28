@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import AddDelivery from "./AddDelivery";
 
 function DashboardRibbon() {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => {
+    setShowModal(!showModal);
+  };
   return (
     <div className="flex justify-end mb-6">
-      <button className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400">
+      <button
+        onClick={handleShowModal}
+        className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400"
+      >
         New Delivery
       </button>
+      <AddDelivery showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 }
