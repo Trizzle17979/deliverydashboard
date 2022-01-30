@@ -11,10 +11,10 @@ const NavBar: React.FC = () => {
       </div>
       <div>
         <NavLink
-          to="/dashboard"
+          to="/login"
           className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400"
         >
-          Sign In
+          Log In
         </NavLink>
       </div>
     </nav>

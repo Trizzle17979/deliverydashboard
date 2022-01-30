@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import AddDelivery from "./AddDelivery";
 
 const DashboardRibbon: React.FC = () => {
@@ -15,10 +16,15 @@ const DashboardRibbon: React.FC = () => {
       >
         New Delivery
       </button>
+      <NavLink
+        to="/profile"
+        className="text-white py-3 px-6 bg-red-500 rounded-md hover:bg-red-400 ml-4"
+      >
+        Profile
+      </NavLink>
       <AddDelivery showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 };
 
 export default DashboardRibbon;
-// <div className="col-start-1 col-end-5 row-start-1 row-end-2 justify-self-end self-center">
