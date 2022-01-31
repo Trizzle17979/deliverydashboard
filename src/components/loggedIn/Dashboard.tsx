@@ -19,7 +19,7 @@ const Dashboard: React.FC = () => {
   });
 
   return (
-    <div className="px-24 py-8">
+    <div className="px-24 py-8 min-h-screen">
       <DashboardRibbon />
       <div className="grid grid-cols-4 gap-8">
         <div className="col-start-1 col-end-2 space-y-2 flex flex-col">
