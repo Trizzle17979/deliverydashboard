@@ -1,7 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { supabase } from "../supabaseClient";
 
 const NavBar: React.FC = () => {
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+  };
   return (
     <nav className="bg-blue-900 flex justify-between items-center px-24 py-4">
       <div>
@@ -16,6 +20,18 @@ const NavBar: React.FC = () => {
         >
           Log In
         </NavLink>
+        <NavLink
+          to="/signup"
+          className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400 ml-4"
+        >
+          Sign Up
+        </NavLink>
+        <button
+          onClick={handleLogout}
+          className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400 ml-4"
+        >
+          Logout
+        </button>
       </div>
     </nav>
   );

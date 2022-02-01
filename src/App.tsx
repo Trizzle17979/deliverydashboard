@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import MainPage from "./components/loggedOut/MainPage";
 import Dashboard from "./components/loggedIn/Dashboard";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 import Profile from "./components/loggedIn/Profile";
 
 const App: React.FC = () => {
@@ -27,6 +28,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         {/* <Route path="/profile" element={<Profile session={session} />} /> */}
         <Route path="/" element={<MainPage />} />
       </Routes>

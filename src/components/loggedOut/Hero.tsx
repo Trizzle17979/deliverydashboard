@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Hero: React.FC<Props> = ({ learnMoreSection }) => {
-  console.log(supabase);
+  // console.log(supabase);
   // useEffect(() => {
   //   uploadData();
   // }, []);
@@ -48,7 +48,7 @@ const Hero: React.FC<Props> = ({ learnMoreSection }) => {
         </h4>
         <div className="flex gap-4 items-center">
           <NavLink
-            to="/dashboard"
+            to="/signup"
             className="text-white py-3 px-6 w-1/2 text-center bg-blue-500 rounded-md hover:bg-blue-400 hover:-translate-y-0.5 transform transition"
           >
             Sign Up
