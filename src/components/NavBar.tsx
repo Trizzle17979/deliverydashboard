@@ -15,20 +15,20 @@ const NavBar: React.FC = () => {
       </div>
       <div>
         <NavLink
-          to="/login"
-          className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400"
-        >
-          Log In
-        </NavLink>
-        <NavLink
           to="/signup"
           className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400 ml-4"
         >
           Sign Up
         </NavLink>
+        <NavLink
+          to="/login"
+          className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400 ml-4"
+        >
+          Log In
+        </NavLink>
         <button
           onClick={handleLogout}
-          className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400 ml-4"
+          className="text-white py-3 px-6 bg-red-500 rounded-md hover:bg-red-400 ml-4"
         >
           Logout
         </button>
