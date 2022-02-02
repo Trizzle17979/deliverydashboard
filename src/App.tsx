@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
+import PrivateRoute from "./components/PrivateRoute";
 
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -11,12 +12,13 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/loggedIn/Profile";
 
-const App: React.FC = ({ user }) => {
+import { sessionCheck } from "./actions";
+
+const App: React.FC = ({ user, dispatch }) => {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
-    const currentsession = supabase.auth.session();
-    setSession(currentsession?.user ?? null);
+    dispatch(sessionCheck);
   }, [user]);
 
   console.log("SESSION", session);
@@ -26,7 +28,10 @@ const App: React.FC = ({ user }) => {
       <NavBar />
 
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<PrivateRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         {/* <Route path="/profile" element={<Profile session={session} />} /> */}

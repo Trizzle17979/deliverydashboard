@@ -4,6 +4,7 @@ export const FETCH_USER = "FETCH_USER";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_ERROR = "FETCH_ERROR";
 export const LOGOUT_USER = "LOGOUT_USER";
+export const SESSION_ACTIVE = "SESSION_ACTIVE";
 
 export const loginUser = (email: string, password: string) => {
   return async (dispatch) => {
@@ -29,5 +30,14 @@ export const logoutUser = (isLoggedIn: boolean) => {
       console.log(error);
     }
     dispatch({ type: LOGOUT_USER, payload: isLoggedIn });
+  };
+};
+
+export const sessionCheck = () => {
+  return async (dispatch) => {
+    const currentsession = supabase.auth.session();
+    if (currentsession) {
+      dispatch({ type: SESSION_ACTIVE });
+    }
   };
 };

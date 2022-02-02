@@ -3,6 +3,7 @@ import {
   FETCH_SUCCESS,
   FETCH_ERROR,
   LOGOUT_USER,
+  SESSION_ACTIVE,
 } from "../actions";
 
 const initialState = {
@@ -38,6 +39,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: action.payload,
+      };
+    case SESSION_ACTIVE:
+      return {
+        ...state,
+        isLoggedIn: true,
       };
     default:
       return state;

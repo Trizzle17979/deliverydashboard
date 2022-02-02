@@ -9,7 +9,7 @@ interface valuesInterface {
   password: string;
 }
 
-const Login: React.FC = ({ isFetching, error, user, dispatch }) => {
+const Login: React.FC = ({ isFetching, error, dispatch, isLoggedIn }) => {
   const [values, setValues] = useState<valuesInterface>({
     email: "",
     password: "",
@@ -25,14 +25,17 @@ const Login: React.FC = ({ isFetching, error, user, dispatch }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    dispatch(loginUser(values.email, values.password));
+    await dispatch(loginUser(values.email, values.password));
   };
 
+  // if (isLoggedIn) {
+  //   navigate("/dashboard");
+  // }
   useEffect(() => {
-    if (user) {
+    if (isLoggedIn) {
       navigate("/dashboard");
     }
-  }, [user]);
+  }, [isLoggedIn]);
 
   return (
     <div className="flex justify-center bg-gray-200 text-slate-700 pb-64">
@@ -78,7 +81,7 @@ const mapStateToProps = (state) => {
   return {
     isFetching: state.isFetching,
     error: state.error,
-    user: state.user,
+    isLoggedIn: state.isLoggedIn,
   };
 };
 
