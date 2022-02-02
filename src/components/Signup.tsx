@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { supabase } from "../supabaseClient";
 import * as yup from "yup";
+import { supabase } from "../supabaseClient";
 import formSchema from "./formSchema";
+
+interface valuesInterface {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  termsAndPrivacy: boolean;
+  name?: unknown;
+}
 
 const Signup: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [disabled, setDisabled] = useState(true);
-  const [formErrors, setFormErrors] = useState({
+  const [formErrors, setFormErrors] = useState<valuesInterface>({
     name: "",
   });
-  const [values, setValues] = useState({
+  const [values, setValues] = useState<valuesInterface>({
     email: "",
     password: "",
     firstName: "",
     lastName: "",
     termsAndPrivacy: false,
   });
-  console.log(values);
 
   const validateForm = (name: string, value: string) => {
     yup
@@ -28,7 +36,6 @@ const Signup: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.type === "checkbox") {
-      console.log(e.target.checked);
       const isChecked = "" + e.target.checked;
       validateForm(e.target.name, isChecked);
       setValues({
@@ -44,7 +51,7 @@ const Signup: React.FC = () => {
     }
   };
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       setLoading(true);

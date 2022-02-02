@@ -5,18 +5,22 @@ import DashboardHome from "./DashboardHome";
 import DashboardAnalytics from "./DashboardAnalytics";
 import DashboardTable from "./DashboardTable";
 
+import { connect } from "react-redux";
+
 interface Show {
   home: boolean;
   analytics: boolean;
   table: boolean;
 }
 
-const Dashboard: React.FC = () => {
+const Dashboard: React.FC = (props) => {
   const [show, setShow] = useState<Show>({
     home: true,
     analytics: false,
     table: false,
   });
+
+  console.log("DASHBOARD: ", props.user);
 
   return (
     <div className="px-24 py-8 min-h-screen">
@@ -76,4 +80,10 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(Dashboard);

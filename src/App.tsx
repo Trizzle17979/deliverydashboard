@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -10,16 +11,15 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/loggedIn/Profile";
 
-const App: React.FC = () => {
-  // const [session, setSession] = useState(null);
+const App: React.FC = ({ user }) => {
+  const [session, setSession] = useState(null);
 
-  // useEffect(() => {
-  //   setSession(supabase.auth.session());
+  useEffect(() => {
+    const currentsession = supabase.auth.session();
+    setSession(currentsession?.user ?? null);
+  }, [user]);
 
-  //   supabase.auth.onAuthStateChange((_event, session) => {
-  //     setSession(session);
-  //   });
-  // }, []);
+  console.log("SESSION", session);
 
   return (
     <Router>
@@ -38,4 +38,10 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(App);

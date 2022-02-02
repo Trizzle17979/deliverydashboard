@@ -1,12 +1,20 @@
-import React, { useState } from "react";
-import { supabase } from "../supabaseClient";
+import React, { useState, useEffect } from "react";
 
-const Login: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [values, setValues] = useState({
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../actions";
+
+interface valuesInterface {
+  email: string;
+  password: string;
+}
+
+const Login: React.FC = ({ isFetching, error, user, dispatch }) => {
+  const [values, setValues] = useState<valuesInterface>({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues({
@@ -17,23 +25,15 @@ const Login: React.FC = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      setLoading(true);
-
-      const { user, session, error } = await supabase.auth.signIn({
-        email: values.email,
-        password: values.password,
-      });
-      console.log("USER: ", user);
-      console.log("SESSION: ", session);
-
-      if (error) throw error;
-    } catch (error) {
-      alert(error.error_description || error.message);
-    } finally {
-      setLoading(false);
-    }
+    dispatch(loginUser(values.email, values.password));
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user]);
+
   return (
     <div className="flex justify-center bg-gray-200 text-slate-700 pb-64">
       <div className="flex flex-col items-center gap-8 p-8 border-2">
@@ -61,16 +61,25 @@ const Login: React.FC = () => {
               />
             </label>
             <button
-              disabled={loading}
+              disabled={isFetching}
               className="bg-blue-900 text-white px-2 py-3 rounded-md hover:bg-blue-500"
             >
-              {loading ? <span>Loading</span> : <span>Login</span>}
+              {isFetching ? <span>Loading</span> : <span>Login</span>}
             </button>
           </form>
+          {error ? <p>{error}</p> : null}
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.isFetching,
+    error: state.error,
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(Login);

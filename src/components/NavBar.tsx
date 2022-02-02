@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../actions";
+import { connect } from "react-redux";
 import { supabase } from "../supabaseClient";
 
-const NavBar: React.FC = () => {
+const NavBar: React.FC = ({ isLoggedIn, dispatch }) => {
+  const navigate = useNavigate();
   const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
+    dispatch(logoutUser(false));
+    supabase.auth.signOut();
+    navigate("/");
   };
   return (
     <nav className="bg-blue-900 flex justify-between items-center px-24 py-4">
@@ -14,27 +20,39 @@ const NavBar: React.FC = () => {
         </NavLink>
       </div>
       <div>
-        <NavLink
-          to="/signup"
-          className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400 ml-4"
-        >
-          Sign Up
-        </NavLink>
-        <NavLink
-          to="/login"
-          className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400 ml-4"
-        >
-          Log In
-        </NavLink>
-        <button
-          onClick={handleLogout}
-          className="text-white py-3 px-6 bg-red-500 rounded-md hover:bg-red-400 ml-4"
-        >
-          Logout
-        </button>
+        {!isLoggedIn ? (
+          <NavLink
+            to="/signup"
+            className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400 ml-4"
+          >
+            Sign Up
+          </NavLink>
+        ) : null}
+        {!isLoggedIn ? (
+          <NavLink
+            to="/login"
+            className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400 ml-4"
+          >
+            Log In
+          </NavLink>
+        ) : null}
+        {isLoggedIn ? (
+          <button
+            onClick={handleLogout}
+            className="text-white py-3 px-6 bg-red-500 rounded-md hover:bg-red-400 ml-4"
+          >
+            Logout
+          </button>
+        ) : null}
       </div>
     </nav>
   );
 };
 
-export default NavBar;
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.isLoggedIn,
+  };
+};
+
+export default connect(mapStateToProps)(NavBar);
