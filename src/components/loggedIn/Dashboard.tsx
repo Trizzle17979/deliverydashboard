@@ -13,7 +13,11 @@ interface Show {
   table: boolean;
 }
 
-const Dashboard: React.FC = () => {
+interface Props {
+  user: string;
+}
+
+const Dashboard: React.FC<Props> = ({ user }) => {
   const [show, setShow] = useState<Show>({
     home: true,
     analytics: false,

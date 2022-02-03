@@ -38,12 +38,9 @@ const Login: React.FC<Props> = ({
 
   const handleLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await dispatch(loginUser(values.email, values.password));
+    dispatch(loginUser(values.email, values.password));
   };
 
-  // if (isLoggedIn) {
-  //   navigate("/dashboard");
-  // }
   useEffect(() => {
     if (isLoggedIn) {
       navigate("/dashboard");

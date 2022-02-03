@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
-import { supabase } from "../supabaseClient";
+import { signUpUser } from "../actions";
 import formSchema from "./formSchema";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { useNavigate } from "react-router-dom";
 
 interface valuesInterface {
   firstName: string;
@@ -24,8 +27,14 @@ interface errObj {
   errors: string;
 }
 
-const Signup: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+interface Props {
+  isFetching: boolean;
+  dispatch: Dispatch<any>;
+  isLoggedIn: boolean;
+}
+
+const Signup: React.FC<Props> = ({ isFetching, isLoggedIn, dispatch }) => {
+  const navigate = useNavigate();
   const [disabled, setDisabled] = useState(true);
   const [formErrors, setFormErrors] = useState<errorsInterface>({
     name: "",
@@ -67,23 +76,22 @@ const Signup: React.FC = () => {
 
   const handleLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      setLoading(true);
-
-      const { user, session, error } = await supabase.auth.signUp({
-        email: values.email,
-        password: values.password,
-      });
-      console.log("USER: ", user);
-      console.log("SESSION: ", session);
-
-      if (error) throw error;
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+    dispatch(
+      signUpUser(
+        values.email,
+        values.password,
+        values.firstName,
+        values.lastName,
+        values.termsAndPrivacy
+      )
+    );
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/dashboard");
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     formSchema.isValid(values).then((valid) => setDisabled(!valid));
@@ -173,7 +181,7 @@ const Signup: React.FC = () => {
               disabled={disabled}
               className="bg-blue-900 text-white px-2 py-3 rounded-md hover:bg-blue-500 disabled:bg-gray-600 disabled:cursor-not-allowed"
             >
-              {loading ? <span>Loading</span> : <span>Sign Up</span>}
+              {isFetching ? <span>Loading</span> : <span>Sign Up</span>}
             </button>
           </form>
         </div>
@@ -182,4 +190,16 @@ const Signup: React.FC = () => {
   );
 };
 
-export default Signup;
+interface MappedInterface {
+  isFetching: boolean;
+  isLoggedIn: boolean;
+}
+
+const mapStateToProps = (state: MappedInterface) => {
+  return {
+    isFetching: state.isFetching,
+    isLoggedIn: state.isLoggedIn,
+  };
+};
+
+export default connect(mapStateToProps)(Signup);

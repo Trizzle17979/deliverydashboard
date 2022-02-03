@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { supabase } from "./supabaseClient";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute";
@@ -12,18 +11,23 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/loggedIn/Profile";
 
-import { sessionCheck } from "./actions";
+import { sessionCheck, tokenCheck } from "./actions";
 import { Dispatch } from "redux";
 
 interface Props {
   user: string;
+  isLoggedIn: boolean;
   dispatch: Dispatch<any>;
 }
 
-const App: React.FC<Props> = ({ user, dispatch }) => {
+const App: React.FC<Props> = ({ user, isLoggedIn, dispatch }) => {
   useEffect(() => {
     dispatch(sessionCheck);
   }, [user]);
+
+  useEffect(() => {
+    dispatch(tokenCheck);
+  }, []);
 
   return (
     <Router>
@@ -55,6 +59,7 @@ interface mappedInterface {
 const mapStateToProps = (state: mappedInterface) => {
   return {
     user: state.user,
+    isLoggedIn: state.isLoggedIn,
   };
 };
 

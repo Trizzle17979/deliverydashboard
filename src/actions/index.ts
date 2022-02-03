@@ -6,6 +6,7 @@ export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_ERROR = "FETCH_ERROR";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const SESSION_ACTIVE = "SESSION_ACTIVE";
+export const TOKEN_ACTIVE = "TOKEN_ACTIVE";
 
 export const loginUser = (email: string, password: string) => {
   return async (dispatch: Dispatch) => {
@@ -19,6 +20,39 @@ export const loginUser = (email: string, password: string) => {
     if (user) {
       dispatch({ type: FETCH_SUCCESS, payload: user });
     } else if (error) {
+      dispatch({ type: FETCH_ERROR, payload: error.message });
+    }
+  };
+};
+
+export const signUpUser = (
+  email: string,
+  password: string,
+  firstName: string,
+  lastName: string,
+  termsAndPrivacy: boolean
+) => {
+  return async (dispatch: Dispatch) => {
+    dispatch({ type: FETCH_USER });
+
+    const { user, session, error } = await supabase.auth.signUp(
+      {
+        email: email,
+        password: password,
+      },
+      {
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+          termsAndPrivacy: termsAndPrivacy,
+        },
+      }
+    );
+
+    if (user) {
+      dispatch({ type: FETCH_SUCCESS, payload: user });
+    } else if (error) {
+      console.log(error);
       dispatch({ type: FETCH_ERROR, payload: error.message });
     }
   };
@@ -39,6 +73,17 @@ export const sessionCheck = () => {
     const currentsession = supabase.auth.session();
     if (currentsession) {
       dispatch({ type: SESSION_ACTIVE });
+    }
+  };
+};
+
+export const tokenCheck = () => {
+  return async (dispatch: Dispatch) => {
+    const token = localStorage.getItem("supabase.auth.token");
+    console.log("TOKEN FOUND");
+
+    if (token) {
+      dispatch({ type: TOKEN_ACTIVE });
     }
   };
 };

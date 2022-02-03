@@ -4,6 +4,7 @@ import {
   FETCH_ERROR,
   LOGOUT_USER,
   SESSION_ACTIVE,
+  TOKEN_ACTIVE,
 } from "../actions";
 
 const initialState = {
@@ -19,7 +20,8 @@ interface Action {
     | "FETCH_SUCCESS"
     | "FETCH_ERROR"
     | "LOGOUT_USER"
-    | "SESSION_ACTIVE";
+    | "SESSION_ACTIVE"
+    | "TOKEN_ACTIVE";
   payload: string | boolean;
 }
 
@@ -51,6 +53,11 @@ const reducer = (state = initialState, action: Action) => {
         isLoggedIn: action.payload,
       };
     case SESSION_ACTIVE:
+      return {
+        ...state,
+        isLoggedIn: true,
+      };
+    case TOKEN_ACTIVE:
       return {
         ...state,
         isLoggedIn: true,

@@ -21,7 +21,7 @@ const formSchema = yup.object().shape({
     .string()
     .trim()
     .required("Password Required")
-    .min(2, "Password must be at least 2 characters"),
+    .min(6, "Password must be at least 6 characters"),
   termsAndPrivacy: yup
     .boolean()
     .oneOf([true], "Terms & Privacy Policy Must Be Checked"),

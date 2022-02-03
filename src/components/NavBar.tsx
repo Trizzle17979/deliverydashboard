@@ -22,7 +22,7 @@ const NavBar: React.FC<Props> = ({ isLoggedIn, dispatch }) => {
     <nav className="bg-blue-900 flex justify-between items-center px-24 py-4">
       <div>
         <NavLink to="/" className="text-white text-2xl font-bold">
-          Delivery Log
+          Delivery Dashboard
         </NavLink>
       </div>
       <div>
@@ -42,6 +42,14 @@ const NavBar: React.FC<Props> = ({ isLoggedIn, dispatch }) => {
             Log In
           </NavLink>
         ) : null}
+        {isLoggedIn && (
+          <NavLink
+            to="/dashboard"
+            className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400 ml-4"
+          >
+            Dashboard
+          </NavLink>
+        )}
         {isLoggedIn ? (
           <button
             onClick={handleLogout}
