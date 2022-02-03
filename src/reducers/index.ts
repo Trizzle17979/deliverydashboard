@@ -13,7 +13,17 @@ const initialState = {
   isLoggedIn: false,
 };
 
-const reducer = (state = initialState, action) => {
+interface Action {
+  type:
+    | "FETCH_USER"
+    | "FETCH_SUCCESS"
+    | "FETCH_ERROR"
+    | "LOGOUT_USER"
+    | "SESSION_ACTIVE";
+  payload: string | boolean;
+}
+
+const reducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case FETCH_USER:
       return {

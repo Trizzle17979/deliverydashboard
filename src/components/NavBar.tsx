@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import { Dispatch } from "redux";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../actions";
 import { connect } from "react-redux";
 import { supabase } from "../supabaseClient";
 
-const NavBar: React.FC = ({ isLoggedIn, dispatch }) => {
+interface Props {
+  isLoggedIn: boolean;
+  dispatch: Dispatch<any>;
+}
+
+const NavBar: React.FC<Props> = ({ isLoggedIn, dispatch }) => {
   const navigate = useNavigate();
   const handleLogout = async () => {
     dispatch(logoutUser(false));
@@ -49,7 +55,14 @@ const NavBar: React.FC = ({ isLoggedIn, dispatch }) => {
   );
 };
 
-const mapStateToProps = (state) => {
+interface mappedInterface {
+  user: string;
+  isFetching: boolean;
+  error: string;
+  isLoggedIn: boolean;
+}
+
+const mapStateToProps = (state: mappedInterface) => {
   return {
     isLoggedIn: state.isLoggedIn,
   };

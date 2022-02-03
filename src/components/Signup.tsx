@@ -9,13 +9,25 @@ interface valuesInterface {
   email: string;
   password: string;
   termsAndPrivacy: boolean;
-  name?: unknown;
+}
+
+interface errorsInterface {
+  name: unknown;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  password?: string;
+  termsAndPrivacy?: boolean;
+}
+
+interface errObj {
+  errors: string;
 }
 
 const Signup: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [disabled, setDisabled] = useState(true);
-  const [formErrors, setFormErrors] = useState<valuesInterface>({
+  const [formErrors, setFormErrors] = useState<errorsInterface>({
     name: "",
   });
   const [values, setValues] = useState<valuesInterface>({
@@ -31,7 +43,9 @@ const Signup: React.FC = () => {
       .reach(formSchema, name)
       .validate(value)
       .then(() => setFormErrors({ ...formErrors, [name]: "" }))
-      .catch((err) => setFormErrors({ ...formErrors, [name]: err.errors[0] }));
+      .catch((err: errObj) =>
+        setFormErrors({ ...formErrors, [name]: err.errors[0] })
+      );
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +79,7 @@ const Signup: React.FC = () => {
 
       if (error) throw error;
     } catch (error) {
-      alert(error.error_description || error.message);
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -141,7 +155,6 @@ const Signup: React.FC = () => {
                   type="checkbox"
                   name="termsAndPrivacy"
                   onChange={handleChange}
-                  value={values.termsAndPrivacy}
                 />
                 I agree to the
                 <a href="#" className="text-blue-900 hover:text-blue-500">

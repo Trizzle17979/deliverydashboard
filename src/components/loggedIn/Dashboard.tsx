@@ -78,7 +78,14 @@ const Dashboard: React.FC = () => {
   );
 };
 
-const mapStateToProps = (state) => {
+interface mappedInterface {
+  user: string;
+  isFetching: boolean;
+  error: string;
+  isLoggedIn: boolean;
+}
+
+const mapStateToProps = (state: mappedInterface) => {
   return {
     user: state.user,
   };

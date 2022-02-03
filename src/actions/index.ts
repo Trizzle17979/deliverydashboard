@@ -1,3 +1,4 @@
+import { Dispatch } from "redux";
 import { supabase } from "../supabaseClient";
 
 export const FETCH_USER = "FETCH_USER";
@@ -7,7 +8,7 @@ export const LOGOUT_USER = "LOGOUT_USER";
 export const SESSION_ACTIVE = "SESSION_ACTIVE";
 
 export const loginUser = (email: string, password: string) => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     dispatch({ type: FETCH_USER });
 
     const { user, session, error } = await supabase.auth.signIn({
@@ -24,7 +25,7 @@ export const loginUser = (email: string, password: string) => {
 };
 
 export const logoutUser = (isLoggedIn: boolean) => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     const { error } = await supabase.auth.signOut();
     if (error) {
       console.log(error);
@@ -34,7 +35,7 @@ export const logoutUser = (isLoggedIn: boolean) => {
 };
 
 export const sessionCheck = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     const currentsession = supabase.auth.session();
     if (currentsession) {
       dispatch({ type: SESSION_ACTIVE });

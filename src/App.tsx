@@ -13,8 +13,14 @@ import Signup from "./components/Signup";
 import Profile from "./components/loggedIn/Profile";
 
 import { sessionCheck } from "./actions";
+import { Dispatch } from "redux";
 
-const App: React.FC = ({ user, dispatch }) => {
+interface Props {
+  user: string;
+  dispatch: Dispatch<any>;
+}
+
+const App: React.FC<Props> = ({ user, dispatch }) => {
   useEffect(() => {
     dispatch(sessionCheck);
   }, [user]);
@@ -39,7 +45,14 @@ const App: React.FC = ({ user, dispatch }) => {
   );
 };
 
-const mapStateToProps = (state) => {
+interface mappedInterface {
+  user: string;
+  isFetching: boolean;
+  error: string;
+  isLoggedIn: boolean;
+}
+
+const mapStateToProps = (state: mappedInterface) => {
   return {
     user: state.user,
   };

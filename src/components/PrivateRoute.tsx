@@ -2,11 +2,22 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
 
-const PrivateRoute = (props) => {
+interface Props {
+  isLoggedIn: boolean;
+}
+
+const PrivateRoute = (props: Props) => {
   return props.isLoggedIn ? <Outlet /> : <Navigate to="/" />;
 };
 
-const mapStateToProps = (state) => {
+interface mappedInterface {
+  user: string;
+  isFetching: boolean;
+  error: string;
+  isLoggedIn: boolean;
+}
+
+const mapStateToProps = (state: mappedInterface) => {
   return {
     isLoggedIn: state.isLoggedIn,
   };

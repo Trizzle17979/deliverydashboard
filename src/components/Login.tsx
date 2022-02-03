@@ -2,14 +2,27 @@ import React, { useState, useEffect } from "react";
 
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Dispatch } from "redux";
 import { loginUser } from "../actions";
+
+interface Props {
+  isFetching: boolean;
+  error: string;
+  dispatch: Dispatch<any>;
+  isLoggedIn: boolean;
+}
 
 interface valuesInterface {
   email: string;
   password: string;
 }
 
-const Login: React.FC = ({ isFetching, error, dispatch, isLoggedIn }) => {
+const Login: React.FC<Props> = ({
+  isFetching,
+  error,
+  dispatch,
+  isLoggedIn,
+}) => {
   const [values, setValues] = useState<valuesInterface>({
     email: "",
     password: "",
@@ -23,7 +36,7 @@ const Login: React.FC = ({ isFetching, error, dispatch, isLoggedIn }) => {
     });
   };
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     await dispatch(loginUser(values.email, values.password));
   };
@@ -77,7 +90,14 @@ const Login: React.FC = ({ isFetching, error, dispatch, isLoggedIn }) => {
   );
 };
 
-const mapStateToProps = (state) => {
+interface mappedInterface {
+  user: string;
+  isFetching: boolean;
+  error: string;
+  isLoggedIn: boolean;
+}
+
+const mapStateToProps = (state: mappedInterface) => {
   return {
     isFetching: state.isFetching,
     error: state.error,
