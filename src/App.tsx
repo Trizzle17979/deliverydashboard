@@ -15,13 +15,9 @@ import Profile from "./components/loggedIn/Profile";
 import { sessionCheck } from "./actions";
 
 const App: React.FC = ({ user, dispatch }) => {
-  const [session, setSession] = useState(null);
-
   useEffect(() => {
     dispatch(sessionCheck);
   }, [user]);
-
-  console.log("SESSION", session);
 
   return (
     <Router>
