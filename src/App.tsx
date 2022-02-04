@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute";
-
+import { supabase } from "./supabaseClient";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import MainPage from "./components/loggedOut/MainPage";
@@ -28,6 +28,8 @@ const App: React.FC<Props> = ({ user, isLoggedIn, dispatch }) => {
   useEffect(() => {
     dispatch(tokenCheck);
   }, []);
+
+  console.log("APP USER: ", supabase.auth.user());
 
   return (
     <Router>

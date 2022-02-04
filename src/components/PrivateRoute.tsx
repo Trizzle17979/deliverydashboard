@@ -1,26 +1,8 @@
-import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { connect } from "react-redux";
+import { supabase } from "../supabaseClient";
 
-interface Props {
-  isLoggedIn: boolean;
-}
-
-const PrivateRoute = (props: Props) => {
-  return props.isLoggedIn ? <Outlet /> : <Navigate to="/" />;
+const PrivateRoute = () => {
+  return supabase.auth.user() ? <Outlet /> : <Navigate to="/" />;
 };
 
-interface mappedInterface {
-  user: string;
-  isFetching: boolean;
-  error: string;
-  isLoggedIn: boolean;
-}
-
-const mapStateToProps = (state: mappedInterface) => {
-  return {
-    isLoggedIn: state.isLoggedIn,
-  };
-};
-
-export default connect(mapStateToProps)(PrivateRoute);
+export default PrivateRoute;

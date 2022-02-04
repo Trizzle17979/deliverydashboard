@@ -18,7 +18,7 @@ export const loginUser = (email: string, password: string) => {
     });
 
     if (user) {
-      dispatch({ type: FETCH_SUCCESS, payload: user });
+      dispatch({ type: FETCH_SUCCESS, payload: supabase.auth.user() });
     } else if (error) {
       dispatch({ type: FETCH_ERROR, payload: error.message });
     }
@@ -50,7 +50,7 @@ export const signUpUser = (
     );
 
     if (user) {
-      dispatch({ type: FETCH_SUCCESS, payload: user });
+      dispatch({ type: FETCH_SUCCESS, payload: supabase.auth.user() });
     } else if (error) {
       console.log(error);
       dispatch({ type: FETCH_ERROR, payload: error.message });

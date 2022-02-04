@@ -7,8 +7,10 @@ import {
   TOKEN_ACTIVE,
 } from "../actions";
 
+import { supabase } from "../supabaseClient";
+
 const initialState = {
-  user: "",
+  user: supabase.auth.user(),
   isFetching: false,
   error: "",
   isLoggedIn: false,

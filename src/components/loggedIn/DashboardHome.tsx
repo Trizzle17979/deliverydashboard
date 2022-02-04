@@ -1,6 +1,18 @@
 import React from "react";
+import { supabase } from "../../supabaseClient";
 
 const DashboardHome: React.FC = () => {
+  const getData = async () => {
+    const { data, error } = await supabase.from("deliveries").select("*");
+
+    if (error) {
+      console.log("ERROR: ", error);
+    }
+    console.log(data);
+  };
+
+  getData();
+
   return (
     <div className="space-y-4 flex flex-col items-center">
       <h2 className="text-2xl mb-8">Home Dashboard</h2>
