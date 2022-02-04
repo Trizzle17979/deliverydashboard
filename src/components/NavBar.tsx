@@ -63,4 +63,4 @@ const NavBar: React.FC<Props> = ({ dispatch }) => {
   );
 };
 
-export default NavBar;
+export default connect()(NavBar);
