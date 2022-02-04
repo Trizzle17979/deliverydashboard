@@ -10,9 +10,18 @@ interface Props {
   deliveryData: [];
 }
 
+interface DataObj {
+  id: number;
+  delivery_date: string;
+  total_pay: number;
+  total_orders: number;
+  total_miles: number;
+  total_mpg: number;
+}
+
 const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [dataArr, setDataArr] = useState([]);
+  const [dataArr, setDataArr] = useState<DataObj[]>([]);
   const [table, setTable] = useState<JSX.Element[]>([]);
 
   const handleShowModal = () => {
@@ -23,8 +32,9 @@ const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
     const { data, error } = await supabase.from("deliveries").select("*");
     if (error) {
       console.log("ERROR: ", error);
+    } else if (data) {
+      setDataArr(data);
     }
-    setDataArr(data);
   };
 
   useEffect(() => {

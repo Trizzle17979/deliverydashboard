@@ -13,7 +13,7 @@ interface DataArray {
 }
 
 const DashboardHome: React.FC = () => {
-  const [dataArr, setDataArr] = useState([]);
+  const [dataArr, setDataArr] = useState<any[]>([]);
   const [values, setValues] = useState({
     sumTotalPay: 0,
     sumNetPay: 0,
@@ -32,12 +32,11 @@ const DashboardHome: React.FC = () => {
 
   const getData = async () => {
     const { data, error } = await supabase.from("deliveries").select("*");
-
     if (error) {
       console.log("ERROR: ", error);
+    } else if (data) {
+      setDataArr(data);
     }
-    console.log("DATA: ", data);
-    setDataArr(data);
   };
 
   useEffect(() => {
@@ -128,7 +127,6 @@ const DashboardHome: React.FC = () => {
     // avgMpg = sumMpg / sumDeliveries;
     // avgCostPerOrder = sumCostPerOrder / sumOrders;
     // avgGasPrice = sumGasPrice / sumDeliveries;
-    console.log(values.avgGasPrice);
   }, [dataArr]);
 
   return (
