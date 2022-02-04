@@ -21,15 +21,8 @@ interface Props {
 }
 
 const App: React.FC<Props> = ({ user, isLoggedIn, dispatch }) => {
-  useEffect(() => {
-    dispatch(sessionCheck);
-  }, [user]);
-
-  useEffect(() => {
-    dispatch(tokenCheck);
-  }, []);
-
   console.log("APP USER: ", supabase.auth.user());
+  console.log("USER", user);
 
   return (
     <Router>
