@@ -62,8 +62,6 @@ const AddDelivery: React.FC<Props> = ({ showModal, setShowModal }) => {
     netPay = +netPay.toFixed(2);
     netPayPerHour = +netPayPerHour.toFixed(2);
 
-    console.log(gasCost);
-
     setValues({
       ...values,
       costPerOrder: costPerOrder,
@@ -97,7 +95,6 @@ const AddDelivery: React.FC<Props> = ({ showModal, setShowModal }) => {
       if (error) {
         console.log(error);
       }
-      console.log(data);
       setShowModal(false);
     }, 2500);
   };

@@ -5,8 +5,7 @@ export const FETCH_USER = "FETCH_USER";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_ERROR = "FETCH_ERROR";
 export const LOGOUT_USER = "LOGOUT_USER";
-export const SESSION_ACTIVE = "SESSION_ACTIVE";
-export const TOKEN_ACTIVE = "TOKEN_ACTIVE";
+export const FETCH_DELIVERY_DATA = "FETCH_DELIVERY_DATA";
 
 export const loginUser = (email: string, password: string) => {
   return async (dispatch: Dispatch) => {
@@ -68,22 +67,18 @@ export const logoutUser = (isLoggedIn: boolean) => {
   };
 };
 
-export const sessionCheck = () => {
+export const getDeliveryData = () => {
   return async (dispatch: Dispatch) => {
-    const currentsession = supabase.auth.session();
-    if (currentsession) {
-      dispatch({ type: SESSION_ACTIVE });
-    }
-  };
-};
+    dispatch({ type: FETCH_USER });
+    const { data, error } = await supabase.from("deliveries").select("*");
+    console.log("RAN");
 
-export const tokenCheck = () => {
-  return async (dispatch: Dispatch) => {
-    const token = localStorage.getItem("supabase.auth.token");
-    console.log("TOKEN FOUND");
-
-    if (token) {
-      dispatch({ type: TOKEN_ACTIVE });
+    if (data) {
+      console.log("getDeliveryData: ", data);
+      dispatch({ type: FETCH_DELIVERY_DATA, payload: data });
+    } else if (error) {
+      console.log(error);
+      dispatch({ type: FETCH_ERROR, payload: error.message });
     }
   };
 };

@@ -6,6 +6,7 @@ import DashboardAnalytics from "./DashboardAnalytics";
 import DashboardTable from "./DashboardTable";
 
 import { connect } from "react-redux";
+import { getDeliveryData } from "../../actions";
 
 interface Show {
   home: boolean;

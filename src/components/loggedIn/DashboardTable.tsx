@@ -1,12 +1,66 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TableDetails from "./TableDetails";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { getDeliveryData } from "../../actions";
+import { supabase } from "../../supabaseClient";
 
-const DashboardTable: React.FC = () => {
+interface Props {
+  dispatch: Dispatch<any>;
+  deliveryData: [];
+}
+
+const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [dataArr, setDataArr] = useState([]);
+  const [table, setTable] = useState<JSX.Element[]>([]);
 
   const handleShowModal = () => {
     setShowModal(true);
   };
+
+  const getData = async () => {
+    const { data, error } = await supabase.from("deliveries").select("*");
+    if (error) {
+      console.log("ERROR: ", error);
+    }
+    setDataArr(data);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  useEffect(() => {
+    let tableOutput = dataArr?.map((delivery) => {
+      return (
+        <tr
+          className="bg-blue-200 cursor-pointer duration-300"
+          key={delivery.id}
+        >
+          <td className="py-3 px-6">{delivery.delivery_date}</td>
+          <td className="py-3 px-6">{delivery.total_pay}</td>
+          <td className="py-3 px-6">{delivery.total_orders}</td>
+          <td className="py-3 px-6">{delivery.total_miles}</td>
+          <td className="py-3 px-6">{delivery.total_mpg}</td>
+          <td className="py-3 px-6 text-blue-800">
+            <button onClick={handleShowModal} className="hover:scale-105">
+              details
+            </button>
+          </td>
+          <td className="py-3 px-6 text-red-400">
+            <button
+              onClick={() => console.log("pressed")}
+              className="hover:scale-105"
+            >
+              delete
+            </button>
+          </td>
+        </tr>
+      );
+    });
+    setTable(tableOutput);
+  }, [dataArr]);
 
   return (
     <div className="flex justify-center items-center">
@@ -22,52 +76,23 @@ const DashboardTable: React.FC = () => {
             <th className="py-3 bg-blue-200 text-red-400">Delete</th>
           </tr>
         </thead>
-        <tbody className="text-blue-900 text-center">
-          <tr className="bg-blue-200 cursor-pointer duration-300">
-            <td className="py-3 px-6">1-1-2021</td>
-            <td className="py-3 px-6">$45</td>
-            <td className="py-3 px-6">12</td>
-            <td className="py-3 px-6">27</td>
-            <td className="py-3 px-6">29.9</td>
-            <td className="py-3 px-6 text-blue-800">
-              <button onClick={handleShowModal} className="hover:scale-105">
-                details
-              </button>
-            </td>
-            <td className="py-3 px-6 text-red-400">
-              <button
-                onClick={() => console.log("pressed")}
-                className="hover:scale-105"
-              >
-                delete
-              </button>
-            </td>
-          </tr>
-          <tr className="bg-blue-200 cursor-pointer duration-300">
-            <td className="py-3 px-6">1-5-2021</td>
-            <td className="py-3 px-6">$30</td>
-            <td className="py-3 px-6">9</td>
-            <td className="py-3 px-6">20</td>
-            <td className="py-3 px-6">26.4</td>
-            <td className="py-3 px-6 text-blue-800">
-              <button onClick={handleShowModal} className="hover:scale-105">
-                details
-              </button>
-            </td>
-            <td className="py-3 px-6 text-red-400">
-              <button
-                onClick={() => console.log("pressed")}
-                className="hover:scale-105"
-              >
-                delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
+        <tbody className="text-blue-900 text-center">{table}</tbody>
       </table>
       <TableDetails showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 };
 
-export default DashboardTable;
+interface MappedState {
+  user: string;
+  deliveryData: [];
+}
+
+const mapStateToProps = (state: MappedState) => {
+  return {
+    user: state.user,
+    deliveryData: state.deliveryData,
+  };
+};
+
+export default connect(mapStateToProps)(DashboardTable);

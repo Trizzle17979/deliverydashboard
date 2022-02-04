@@ -11,7 +11,6 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/loggedIn/Profile";
 
-import { sessionCheck, tokenCheck } from "./actions";
 import { Dispatch } from "redux";
 
 interface Props {
@@ -21,8 +20,8 @@ interface Props {
 }
 
 const App: React.FC<Props> = ({ user, isLoggedIn, dispatch }) => {
-  console.log("APP USER: ", supabase.auth.user());
-  console.log("USER", user);
+  // console.log("APP USER: ", supabase.auth.user());
+  // console.log("USER", user);
 
   return (
     <Router>

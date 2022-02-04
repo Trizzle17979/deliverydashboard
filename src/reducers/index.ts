@@ -3,8 +3,7 @@ import {
   FETCH_SUCCESS,
   FETCH_ERROR,
   LOGOUT_USER,
-  SESSION_ACTIVE,
-  TOKEN_ACTIVE,
+  FETCH_DELIVERY_DATA,
 } from "../actions";
 
 import { supabase } from "../supabaseClient";
@@ -14,6 +13,7 @@ const initialState = {
   isFetching: false,
   error: "",
   isLoggedIn: false,
+  deliveryData: [],
 };
 
 interface Action {
@@ -23,7 +23,8 @@ interface Action {
     | "FETCH_ERROR"
     | "LOGOUT_USER"
     | "SESSION_ACTIVE"
-    | "TOKEN_ACTIVE";
+    | "TOKEN_ACTIVE"
+    | "FETCH_DELIVERY_DATA";
   payload: string | boolean;
 }
 
@@ -54,15 +55,10 @@ const reducer = (state = initialState, action: Action) => {
         ...state,
         isLoggedIn: action.payload,
       };
-    case SESSION_ACTIVE:
+    case FETCH_DELIVERY_DATA:
       return {
         ...state,
-        isLoggedIn: true,
-      };
-    case TOKEN_ACTIVE:
-      return {
-        ...state,
-        isLoggedIn: true,
+        deliveyData: action.payload,
       };
     default:
       return state;
