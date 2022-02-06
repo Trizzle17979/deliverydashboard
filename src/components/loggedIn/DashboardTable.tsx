@@ -17,15 +17,26 @@ interface DataObj {
   total_orders: number;
   total_miles: number;
   total_mpg: number;
+  total_time: number;
 }
 
 const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [dataArr, setDataArr] = useState<DataObj[]>([]);
   const [table, setTable] = useState<JSX.Element[]>([]);
+  const [delivery, setDelivery] = useState<DataObj>({
+    id: 0,
+    delivery_date: "",
+    total_pay: 0,
+    total_orders: 0,
+    total_miles: 0,
+    total_mpg: 0,
+    total_time: 0,
+  });
 
-  const handleShowModal = () => {
+  const handleShowModal = (deliveryInput: DataObj) => {
     setShowModal(true);
+    setDelivery(deliveryInput);
   };
 
   const getData = async () => {
@@ -49,12 +60,15 @@ const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
           key={delivery.id}
         >
           <td className="py-3 px-6">{delivery.delivery_date}</td>
-          <td className="py-3 px-6">{delivery.total_pay}</td>
+          <td className="py-3 px-6">${delivery.total_pay}</td>
           <td className="py-3 px-6">{delivery.total_orders}</td>
-          <td className="py-3 px-6">{delivery.total_miles}</td>
-          <td className="py-3 px-6">{delivery.total_mpg}</td>
+          <td className="py-3 px-6">{delivery.total_miles} mi</td>
+          <td className="py-3 px-6">{delivery.total_mpg} mpg</td>
           <td className="py-3 px-6 text-blue-800">
-            <button onClick={handleShowModal} className="hover:scale-105">
+            <button
+              onClick={() => handleShowModal(delivery)}
+              className="hover:scale-105"
+            >
               details
             </button>
           </td>
@@ -88,7 +102,11 @@ const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
         </thead>
         <tbody className="text-blue-900 text-center">{table}</tbody>
       </table>
-      <TableDetails showModal={showModal} setShowModal={setShowModal} />
+      <TableDetails
+        showModal={showModal}
+        setShowModal={setShowModal}
+        delivery={delivery}
+      />
     </div>
   );
 };

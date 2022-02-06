@@ -20,9 +20,6 @@ interface Props {
 }
 
 const App: React.FC<Props> = ({ user, isLoggedIn, dispatch }) => {
-  // console.log("APP USER: ", supabase.auth.user());
-  // console.log("USER", user);
-
   return (
     <Router>
       <NavBar />
