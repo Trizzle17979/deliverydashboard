@@ -11,13 +11,7 @@ const AddDelivery: React.FC<Props> = ({ showModal, setShowModal }) => {
   let currentUserId = currentUser?.id;
 
   const [values, setValues] = useState({
-    costPerOrder: 0,
-    costToOperate: 0,
-    gasCost: 0,
     gasPrice: "",
-    milesPerOrder: 0,
-    netPay: 0,
-    netPayPerHour: 0,
     totalMiles: "",
     totalMpg: "",
     totalOrders: "",
@@ -62,41 +56,29 @@ const AddDelivery: React.FC<Props> = ({ showModal, setShowModal }) => {
     netPay = +netPay.toFixed(2);
     netPayPerHour = +netPayPerHour.toFixed(2);
 
-    setValues({
-      ...values,
-      costPerOrder: costPerOrder,
-      costToOperate: costToOperate,
-      gasCost: gasCost,
-      milesPerOrder: milesPerOrder,
-      netPay: netPay,
-      netPayPerHour: netPayPerHour,
-    });
+    const { data, error } = await supabase.from("deliveries").insert([
+      {
+        cost_per_order: costPerOrder,
+        cost_to_operate: costToOperate,
+        gas_cost: gasCost,
+        gas_price: values.gasPrice,
+        miles_per_order: milesPerOrder,
+        net_pay: netPay,
+        total_miles: values.totalMiles,
+        total_mpg: values.totalMpg,
+        total_orders: values.totalOrders,
+        total_pay: values.totalPay,
+        total_time: values.totalTime,
+        delivery_date: values.deliveryDate,
+        net_pay_per_hour: netPayPerHour,
+        user_id: values.uuid,
+      },
+    ]);
 
-    setTimeout(async () => {
-      const { data, error } = await supabase.from("deliveries").insert([
-        {
-          cost_per_order: values.costPerOrder,
-          cost_to_operate: values.costToOperate,
-          gas_cost: values.gasCost,
-          gas_price: values.gasPrice,
-          miles_per_order: values.milesPerOrder,
-          net_pay: values.netPay,
-          total_miles: values.totalMiles,
-          total_mpg: values.totalMpg,
-          total_orders: values.totalOrders,
-          total_pay: values.totalPay,
-          total_time: values.totalTime,
-          delivery_date: values.deliveryDate,
-          net_pay_per_hour: values.netPayPerHour,
-          user_id: values.uuid,
-        },
-      ]);
-
-      if (error) {
-        console.log(error);
-      }
-      setShowModal(false);
-    }, 2500);
+    if (error) {
+      console.log(error);
+    }
+    setShowModal(false);
   };
 
   return (
