@@ -19,6 +19,8 @@ interface User {
 const DashboardRibbon: React.FC<Props> = ({ user }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
+  console.log(user);
+
   const handleShowModal = () => {
     setShowModal(!showModal);
   };
@@ -49,7 +51,7 @@ const DashboardRibbon: React.FC<Props> = ({ user }) => {
 };
 
 interface mappedInterface {
-  user: string;
+  user: User;
   isFetching: boolean;
   error: string;
   isLoggedIn: boolean;

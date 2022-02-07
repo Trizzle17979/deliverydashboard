@@ -7,34 +7,13 @@ interface Props {
 }
 
 const Hero: React.FC<Props> = ({ learnMoreSection }) => {
-  // console.log(supabase);
-  // useEffect(() => {
-  //   uploadData();
-  // }, []);
-
-  // async function uploadData() {
-  //   const { data, error } = await supabase.from("deliveries_test").insert([
-  //     {
-  //       user_id: "20de4756-0ecc-4d4f-8237-c697a168f973",
-  //       total_pay: "100",
-  //       total_miles: "50",
-  //       total_time: "25",
-  //       mpg: "29.9",
-  //     },
-  //   ]);
-
-  //   let { data: deliveries_test, err } = await supabase
-  //     .from("deliveries_test")
-  //     .select("*");
-  //   console.log(deliveries_test);
-  // }
-
   const handleGoToLearnSection = () => {
     window.scrollTo({
       top: learnMoreSection.current?.offsetTop,
       behavior: "smooth",
     });
   };
+
   return (
     <div className="bg-blue-900 flex justify-between items-center px-24 py-36">
       <div className="w-1/2 flex flex-col space-y-8">
