@@ -8,6 +8,13 @@ interface DataObj {
   total_miles: number;
   total_mpg: number;
   total_time: number;
+  gas_price: number;
+  gas_cost: number;
+  miles_per_order: number;
+  cost_per_order: number;
+  cost_to_operate: number;
+  net_pay: number;
+  net_pay_per_hour: number;
 }
 
 interface Props {
@@ -64,12 +71,44 @@ const TableDetails: React.FC<Props> = ({
                 <h4 className="text-xl">{delivery.total_orders}</h4>
               </div>
               <div className="flex gap-4">
+                <h4 className="text-xl">Total Miles</h4>
+                <h4 className="text-xl">{delivery.total_miles}</h4>
+              </div>
+              <div className="flex gap-4">
                 <h4 className="text-xl">MPG:</h4>
                 <h4 className="text-xl">{delivery.total_mpg}</h4>
               </div>
               <div className="flex gap-4">
+                <h4 className="text-xl">Gas Price (est):</h4>
+                <h4 className="text-xl">${delivery.gas_price}</h4>
+              </div>
+              <div className="flex gap-4">
+                <h4 className="text-xl">Gas Cost:</h4>
+                <h4 className="text-xl">${delivery.gas_cost}</h4>
+              </div>
+              <div className="flex gap-4">
+                <h4 className="text-xl">Miles per Order:</h4>
+                <h4 className="text-xl">{delivery.miles_per_order} mi</h4>
+              </div>
+              <div className="flex gap-4">
+                <h4 className="text-xl">Cost per Order:</h4>
+                <h4 className="text-xl">${delivery.cost_per_order}</h4>
+              </div>
+              <div className="flex gap-4">
                 <h4 className="text-xl">Total Pay:</h4>
                 <h4 className="text-xl">${delivery.total_pay}</h4>
+              </div>
+              <div className="flex gap-4">
+                <h4 className="text-xl">Cost to Operate:</h4>
+                <h4 className="text-xl">${delivery.cost_to_operate}</h4>
+              </div>
+              <div className="flex gap-4">
+                <h4 className="text-xl">Net Pay:</h4>
+                <h4 className="text-xl">${delivery.net_pay}</h4>
+              </div>
+              <div className="flex gap-4">
+                <h4 className="text-xl">Net Pay per Hour:</h4>
+                <h4 className="text-xl">${delivery.net_pay_per_hour}</h4>
               </div>
             </div>
           </div>

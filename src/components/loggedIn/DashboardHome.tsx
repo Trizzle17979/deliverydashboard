@@ -13,6 +13,7 @@ interface DataArray {
 }
 
 const DashboardHome: React.FC = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [dataArr, setDataArr] = useState<any[]>([]);
   const [values, setValues] = useState({
     sumTotalPay: 0,
@@ -31,12 +32,14 @@ const DashboardHome: React.FC = () => {
   });
 
   const getData = async () => {
+    setLoading(true);
     const { data, error } = await supabase.from("deliveries").select("*");
     if (error) {
       console.log("ERROR: ", error);
     } else if (data) {
       setDataArr(data);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -89,44 +92,6 @@ const DashboardHome: React.FC = () => {
         dataArr.reduce((acc, cur: DataArray) => acc + cur.cost_per_order, 0) /
         dataArr.reduce((acc, cur: DataArray) => acc + cur.total_orders, 0),
     });
-
-    // sumTotalPay = dataArr.reduce(
-    //   (acc, cur: DataArray) => acc + cur.total_pay,
-    //   0
-    // );
-    // sumNetPay = dataArr.reduce((acc, cur: DataArray) => acc + cur.net_pay, 0);
-    // sumOrders = dataArr.reduce(
-    //   (acc, cur: DataArray) => acc + cur.total_orders,
-    //   0
-    // );
-    // sumMiles = dataArr.reduce(
-    //   (acc, cur: DataArray) => acc + cur.total_miles,
-    //   0
-    // );
-    // sumGasCost = dataArr.reduce((acc, cur: DataArray) => acc + cur.gas_cost, 0);
-    // sumMpg = dataArr.reduce((acc, cur: DataArray) => acc + cur.total_mpg, 0);
-    // sumCostPerOrder = dataArr.reduce(
-    //   (acc, cur: DataArray) => acc + cur.cost_per_order,
-    //   0
-    // );
-    // sumGasPrice = dataArr.reduce(
-    //   (acc, cur: DataArray) => acc + cur.gas_price,
-    //   0
-    // );
-    // sumDeliveries = dataArr.reduce((acc) => acc + 1, 0);
-
-    // setValues({
-    //   ...values,
-    //   avgNetPay: values.sumNetPay / values.sumDeliveries,
-    //   avgMpg: values.sumMpg / values.sumDeliveries,
-    //   avgGasPrice: values.sumGasPrice / values.sumDeliveries,
-    //   avgCostPerOrder: values.sumCostPerOrder / values.sumOrders,
-    // });
-
-    // avgNetPay = sumNetPay / sumDeliveries;
-    // avgMpg = sumMpg / sumDeliveries;
-    // avgCostPerOrder = sumCostPerOrder / sumOrders;
-    // avgGasPrice = sumGasPrice / sumDeliveries;
   }, [dataArr]);
 
   return (

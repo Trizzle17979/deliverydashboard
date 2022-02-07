@@ -10,6 +10,7 @@ const AddDelivery: React.FC<Props> = ({ showModal, setShowModal }) => {
   let currentUser = supabase.auth.user();
   let currentUserId = currentUser?.id;
 
+  const [disabled, setDisabled] = useState<boolean>(false);
   const [values, setValues] = useState({
     gasPrice: "",
     totalMiles: "",
@@ -25,6 +26,16 @@ const AddDelivery: React.FC<Props> = ({ showModal, setShowModal }) => {
   const closeModal = (e: React.FormEvent) => {
     if (modalRef.current === e.target) {
       setShowModal(false);
+      setValues({
+        ...values,
+        gasPrice: "",
+        totalMiles: "",
+        totalMpg: "",
+        totalOrders: "",
+        totalPay: "",
+        totalTime: "",
+        deliveryDate: "",
+      });
     }
   };
 
@@ -41,6 +52,7 @@ const AddDelivery: React.FC<Props> = ({ showModal, setShowModal }) => {
 
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setDisabled(true);
     let gasCost = (+values.totalMiles / +values.totalMpg) * +values.gasPrice;
     let milesPerOrder = +values.totalMiles / +values.totalOrders;
     // --> Change the 0.19 when you want to calculate larger than sedan <--
@@ -78,7 +90,19 @@ const AddDelivery: React.FC<Props> = ({ showModal, setShowModal }) => {
     if (error) {
       console.log(error);
     }
+
+    setValues({
+      ...values,
+      gasPrice: "",
+      totalMiles: "",
+      totalMpg: "",
+      totalOrders: "",
+      totalPay: "",
+      totalTime: "",
+      deliveryDate: "",
+    });
     setShowModal(false);
+    setDisabled(false);
   };
 
   return (
@@ -169,9 +193,21 @@ const AddDelivery: React.FC<Props> = ({ showModal, setShowModal }) => {
                   name="totalPay"
                 />
               </label>
-              <button className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400">
-                Add Delivery
-              </button>
+              {disabled ? (
+                <button
+                  disabled={disabled}
+                  className="text-white py-3 px-6 disabled:bg-gray-600 bg-blue-500 rounded-md hover:bg-blue-400"
+                >
+                  Loading
+                </button>
+              ) : (
+                <button
+                  disabled={disabled}
+                  className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400"
+                >
+                  Add Delivery
+                </button>
+              )}
             </form>
           </div>
         </div>
