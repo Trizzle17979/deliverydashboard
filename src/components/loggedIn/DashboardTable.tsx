@@ -5,11 +5,6 @@ import { Dispatch } from "redux";
 import { getDeliveryData } from "../../actions";
 import { supabase } from "../../supabaseClient";
 
-interface Props {
-  dispatch: Dispatch<any>;
-  deliveryData: [];
-}
-
 interface DataObj {
   id: number;
   delivery_date: string;
@@ -25,6 +20,11 @@ interface DataObj {
   cost_to_operate: number;
   net_pay: number;
   net_pay_per_hour: number;
+}
+
+interface Props {
+  dispatch: Dispatch<any>;
+  deliveryData: DataObj;
 }
 
 const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
@@ -148,7 +148,7 @@ const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
 
 interface MappedState {
   user: string;
-  deliveryData: [];
+  deliveryData: DataObj;
 }
 
 const mapStateToProps = (state: MappedState) => {

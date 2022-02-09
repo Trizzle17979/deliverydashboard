@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute";
@@ -13,13 +13,23 @@ import Profile from "./components/loggedIn/Profile";
 
 import { Dispatch } from "redux";
 
+interface User {
+  email: string;
+  user_metadata: {
+    first_name: string;
+    last_name: string;
+  };
+}
+
 interface Props {
-  user: string;
+  user: User;
   isLoggedIn: boolean;
   dispatch: Dispatch<any>;
 }
 
 const App: React.FC<Props> = ({ user, isLoggedIn, dispatch }) => {
+  console.log(user);
+
   return (
     <Router>
       <NavBar />
@@ -41,7 +51,7 @@ const App: React.FC<Props> = ({ user, isLoggedIn, dispatch }) => {
 };
 
 interface mappedInterface {
-  user: string;
+  user: User;
   isFetching: boolean;
   error: string;
   isLoggedIn: boolean;

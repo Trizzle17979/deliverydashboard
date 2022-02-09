@@ -19,8 +19,6 @@ interface User {
 const DashboardRibbon: React.FC<Props> = ({ user }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  console.log(user);
-
   const handleShowModal = () => {
     setShowModal(!showModal);
   };
