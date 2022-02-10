@@ -1,16 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
-
-interface DataArray {
-  total_pay: number;
-  net_pay: number;
-  total_orders: number;
-  total_miles: number;
-  gas_cost: number;
-  total_mpg: number;
-  cost_per_order: number;
-  gas_price: number;
-}
+import { DataArray } from "../../types";
 
 const DashboardHome: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);

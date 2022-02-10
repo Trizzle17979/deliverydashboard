@@ -1,3 +1,5 @@
+import { DataArray, User } from "../types";
+
 import {
   FETCH_USER,
   FETCH_SUCCESS,
@@ -29,30 +31,30 @@ const initialState = {
   },
 };
 
-interface DataArray {
-  id: number;
-  delivery_date: string;
-  total_pay: number;
-  total_orders: number;
-  total_miles: number;
-  total_mpg: number;
-  total_time: number;
-  gas_price: number;
-  gas_cost: number;
-  miles_per_order: number;
-  cost_per_order: number;
-  cost_to_operate: number;
-  net_pay: number;
-  net_pay_per_hour: number;
-}
+// interface DataArray {
+//   id: number;
+//   delivery_date: string;
+//   total_pay: number;
+//   total_orders: number;
+//   total_miles: number;
+//   total_mpg: number;
+//   total_time: number;
+//   gas_price: number;
+//   gas_cost: number;
+//   miles_per_order: number;
+//   cost_per_order: number;
+//   cost_to_operate: number;
+//   net_pay: number;
+//   net_pay_per_hour: number;
+// }
 
-interface User {
-  email: string;
-  user_metadata: {
-    first_name: string;
-    last_name: string;
-  };
-}
+// interface User {
+//   email: string;
+//   user_metadata: {
+//     first_name: string;
+//     last_name: string;
+//   };
+// }
 
 interface FetchUserAction {
   type: "FETCH_USER";

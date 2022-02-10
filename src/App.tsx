@@ -11,15 +11,9 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/loggedIn/Profile";
 
-import { Dispatch } from "redux";
+import { User, MappedInterface } from "./types";
 
-interface User {
-  email: string;
-  user_metadata: {
-    first_name: string;
-    last_name: string;
-  };
-}
+import { Dispatch } from "redux";
 
 interface Props {
   user: User;
@@ -50,14 +44,7 @@ const App: React.FC<Props> = ({ user, isLoggedIn, dispatch }) => {
   );
 };
 
-interface mappedInterface {
-  user: User;
-  isFetching: boolean;
-  error: string;
-  isLoggedIn: boolean;
-}
-
-const mapStateToProps = (state: mappedInterface) => {
+const mapStateToProps = (state: MappedInterface) => {
   return {
     user: state.user,
     isLoggedIn: state.isLoggedIn,

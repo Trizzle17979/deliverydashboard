@@ -1,19 +1,12 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import AddDelivery from "./AddDelivery";
+import { User, MappedInterface } from "../../types";
 
 import { connect } from "react-redux";
 
 interface Props {
   user: User;
-}
-
-interface User {
-  email: string;
-  user_metadata: {
-    first_name: string;
-    last_name: string;
-  };
 }
 
 const DashboardRibbon: React.FC<Props> = ({ user }) => {
@@ -48,14 +41,7 @@ const DashboardRibbon: React.FC<Props> = ({ user }) => {
   );
 };
 
-interface mappedInterface {
-  user: User;
-  isFetching: boolean;
-  error: string;
-  isLoggedIn: boolean;
-}
-
-const mapStateToProps = (state: mappedInterface) => {
+const mapStateToProps = (state: MappedInterface) => {
   return {
     user: state.user,
   };

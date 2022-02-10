@@ -5,6 +5,7 @@ import formSchema from "./formSchema";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { useNavigate } from "react-router-dom";
+import { MappedInterface } from "../types";
 
 interface valuesInterface {
   firstName: string;
@@ -189,11 +190,6 @@ const Signup: React.FC<Props> = ({ isFetching, isLoggedIn, dispatch }) => {
     </div>
   );
 };
-
-interface MappedInterface {
-  isFetching: boolean;
-  isLoggedIn: boolean;
-}
 
 const mapStateToProps = (state: MappedInterface) => {
   return {

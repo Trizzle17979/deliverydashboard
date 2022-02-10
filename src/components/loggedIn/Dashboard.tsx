@@ -6,7 +6,7 @@ import DashboardAnalytics from "./DashboardAnalytics";
 import DashboardTable from "./DashboardTable";
 
 import { connect } from "react-redux";
-import { getDeliveryData } from "../../actions";
+import { MappedInterface, User } from "../../types";
 
 interface Show {
   home: boolean;
@@ -15,7 +15,7 @@ interface Show {
 }
 
 interface Props {
-  user: string;
+  user: User;
 }
 
 const Dashboard: React.FC<Props> = ({ user }) => {
@@ -83,14 +83,7 @@ const Dashboard: React.FC<Props> = ({ user }) => {
   );
 };
 
-interface mappedInterface {
-  user: string;
-  isFetching: boolean;
-  error: string;
-  isLoggedIn: boolean;
-}
-
-const mapStateToProps = (state: mappedInterface) => {
+const mapStateToProps = (state: MappedInterface) => {
   return {
     user: state.user,
   };

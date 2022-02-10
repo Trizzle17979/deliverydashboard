@@ -2,38 +2,21 @@ import React, { useEffect, useState } from "react";
 import TableDetails from "./TableDetails";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { getDeliveryData } from "../../actions";
 import { supabase } from "../../supabaseClient";
-
-interface DataObj {
-  id: number;
-  delivery_date: string;
-  total_pay: number;
-  total_orders: number;
-  total_miles: number;
-  total_mpg: number;
-  total_time: number;
-  gas_price: number;
-  gas_cost: number;
-  miles_per_order: number;
-  cost_per_order: number;
-  cost_to_operate: number;
-  net_pay: number;
-  net_pay_per_hour: number;
-}
+import { DataArray, MappedInterface } from "../../types";
 
 interface Props {
   dispatch: Dispatch<any>;
-  deliveryData: DataObj;
+  deliveryData: DataArray;
 }
 
 const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [deleted, setDeleted] = useState({});
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [dataArr, setDataArr] = useState<DataObj[]>([]);
+  const [dataArr, setDataArr] = useState<DataArray[]>([]);
   const [table, setTable] = useState<JSX.Element[]>([]);
-  const [delivery, setDelivery] = useState<DataObj>({
+  const [delivery, setDelivery] = useState<DataArray>({
     id: 0,
     delivery_date: "",
     total_pay: 0,
@@ -50,12 +33,12 @@ const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
     net_pay_per_hour: 0,
   });
 
-  const handleShowModal = (deliveryInput: DataObj) => {
+  const handleShowModal = (deliveryInput: DataArray) => {
     setShowModal(true);
     setDelivery(deliveryInput);
   };
 
-  const handleDelete = async (deleteDelivery: DataObj) => {
+  const handleDelete = async (deleteDelivery: DataArray) => {
     const { data, error } = await supabase
       .from("deliveries")
       .delete()
@@ -146,12 +129,7 @@ const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
   );
 };
 
-interface MappedState {
-  user: string;
-  deliveryData: DataObj;
-}
-
-const mapStateToProps = (state: MappedState) => {
+const mapStateToProps = (state: MappedInterface) => {
   return {
     user: state.user,
     deliveryData: state.deliveryData,

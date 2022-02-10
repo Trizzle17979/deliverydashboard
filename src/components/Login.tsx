@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Dispatch } from "redux";
 import { loginUser } from "../actions";
+import { MappedInterface } from "../types";
 
 interface Props {
   isFetching: boolean;
@@ -87,14 +88,7 @@ const Login: React.FC<Props> = ({
   );
 };
 
-interface mappedInterface {
-  user: string;
-  isFetching: boolean;
-  error: string;
-  isLoggedIn: boolean;
-}
-
-const mapStateToProps = (state: mappedInterface) => {
+const mapStateToProps = (state: MappedInterface) => {
   return {
     isFetching: state.isFetching,
     error: state.error,
