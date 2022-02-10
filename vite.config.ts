@@ -11,5 +11,5 @@ module.exports = {
   build: {
     outDir: "dist",
   },
-  publicDir: "assets",
+  publicDir: "src/assets",
 };
