@@ -21,8 +21,6 @@ interface Props {
 }
 
 const App: React.FC<Props> = ({ user, isLoggedIn, dispatch }) => {
-  console.log(user);
-
   return (
     <Router>
       <NavBar />

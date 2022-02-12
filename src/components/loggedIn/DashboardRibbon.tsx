@@ -19,7 +19,8 @@ const DashboardRibbon: React.FC<Props> = ({ user }) => {
     <div className="flex flex-col gap-4">
       {user && (
         <p className="flex justify-end">
-          Welcome {user.user_metadata.first_name} {user.user_metadata.last_name}
+          Welcome {user.user_metadata?.first_name}{" "}
+          {user.user_metadata?.last_name}
         </p>
       )}
       <div className="flex justify-end mb-6">
