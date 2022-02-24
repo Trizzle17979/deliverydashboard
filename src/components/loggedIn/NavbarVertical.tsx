@@ -24,10 +24,7 @@ const NavbarVertical: React.FC<Props> = ({ setShow }) => {
               });
             }}
           >
-            <img
-              src="./src/assets/home.svg"
-              className="w-6 h-6 hover:scale-110"
-            />
+            <img src="/home.svg" className="w-6 h-6 hover:scale-110" />
           </button>
         </li>
         <li className="flex item-center h-20 no-underline w-full">
@@ -40,10 +37,7 @@ const NavbarVertical: React.FC<Props> = ({ setShow }) => {
               });
             }}
           >
-            <img
-              src="./src/assets/graph-white.svg"
-              className="w-6 h-6 hover:scale-110"
-            />
+            <img src="/graph-white.svg" className="w-6 h-6 hover:scale-110" />
           </button>
         </li>
         <li className="flex item-center h-20 no-underline w-full">
@@ -56,10 +50,7 @@ const NavbarVertical: React.FC<Props> = ({ setShow }) => {
               });
             }}
           >
-            <img
-              src="./src/assets/table.svg"
-              className="w-6 h-6 hover:scale-110"
-            />
+            <img src="/table.svg" className="w-6 h-6 hover:scale-110" />
           </button>
         </li>
         <li className="flex item-center h-20 no-underline w-full mt-auto">
@@ -72,10 +63,7 @@ const NavbarVertical: React.FC<Props> = ({ setShow }) => {
               });
             }}
           >
-            <img
-              src="./src/assets/table.svg"
-              className="w-6 h-6 hover:scale-110"
-            />
+            <img src="/table.svg" className="w-6 h-6 hover:scale-110" />
           </button>
         </li>
       </ul>
