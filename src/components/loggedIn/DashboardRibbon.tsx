@@ -16,7 +16,7 @@ const DashboardRibbon: React.FC<Props> = ({ user }) => {
     setShowModal(!showModal);
   };
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 p-4">
       {user && (
         <p className="flex justify-end">
           Welcome {user.user_metadata?.first_name}{" "}

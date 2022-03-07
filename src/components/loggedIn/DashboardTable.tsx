@@ -69,8 +69,9 @@ const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
     let tableOutput = dataArr?.map((delivery) => {
       return (
         <tr
-          className="bg-blue-200 cursor-pointer duration-300"
+          className="bg-blue-200 cursor-pointer duration-300 hover:bg-blue-300"
           key={delivery.id}
+          onClick={() => handleShowModal(delivery)}
         >
           <td className="py-3 px-6">{delivery.delivery_date}</td>
           <td className="py-3 px-6">${delivery.total_pay}</td>
@@ -101,11 +102,11 @@ const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
   }, [dataArr]);
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center p-4">
       {loading ? (
         <h2>Loading...</h2>
       ) : (
-        <table className="shadow-2xl font-mono border-2 border-blue-200 w-6/12 overflow-hidden">
+        <table className="shadow-2xl font-mono border-2 rounded-md border-blue-200 w-full overflow-hidden">
           <thead className="text-white">
             <tr>
               <th className="py-3 bg-blue-800">Date</th>

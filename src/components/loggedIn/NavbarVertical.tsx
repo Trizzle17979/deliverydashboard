@@ -12,10 +12,11 @@ interface Props {
 
 const NavbarVertical: React.FC<Props> = ({ setShow }) => {
   return (
-    <nav className="fixed overflow-scroll bg-blue-900 w-20 h-screen">
+    <nav className="w-60 m-8">
       <ul className="list-none p-0 m-0 flex flex-col items-center h-full">
-        <li className="flex item-center h-20 no-underline w-full">
-          <button
+        <li className="flex justify-center h-16 no-underline w-full">
+          <div
+            className="flex hover:scale-110 cursor-pointer justify-center items-center gap-3"
             onClick={() => {
               setShow({
                 home: true,
@@ -24,11 +25,13 @@ const NavbarVertical: React.FC<Props> = ({ setShow }) => {
               });
             }}
           >
-            <img src="/home.svg" className="w-6 h-6 hover:scale-110" />
-          </button>
+            <img src="/home.svg" className="w-6 h-6" />
+            <h2 className="text-blue-900">Home</h2>
+          </div>
         </li>
-        <li className="flex item-center h-20 no-underline w-full">
-          <button
+        <li className="flex justify-center h-16 no-underline w-full">
+          <div
+            className="flex hover:scale-110 cursor-pointer justify-center items-center gap-3"
             onClick={() => {
               setShow({
                 home: false,
@@ -38,10 +41,12 @@ const NavbarVertical: React.FC<Props> = ({ setShow }) => {
             }}
           >
             <img src="/graph-white.svg" className="w-6 h-6 hover:scale-110" />
-          </button>
+            <h2 className="text-blue-900">Analytics</h2>
+          </div>
         </li>
-        <li className="flex item-center h-20 no-underline w-full">
-          <button
+        <li className="flex justify-center h-16 no-underline w-full">
+          <div
+            className="flex hover:scale-110 cursor-pointer justify-center items-center gap-3"
             onClick={() => {
               setShow({
                 home: false,
@@ -51,20 +56,8 @@ const NavbarVertical: React.FC<Props> = ({ setShow }) => {
             }}
           >
             <img src="/table.svg" className="w-6 h-6 hover:scale-110" />
-          </button>
-        </li>
-        <li className="flex item-center h-20 no-underline w-full mt-auto">
-          <button
-            onClick={() => {
-              setShow({
-                home: false,
-                analytics: false,
-                table: true,
-              });
-            }}
-          >
-            <img src="/table.svg" className="w-6 h-6 hover:scale-110" />
-          </button>
+            <h2 className="text-blue-900">Table</h2>
+          </div>
         </li>
       </ul>
     </nav>
