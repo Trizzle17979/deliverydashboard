@@ -30,12 +30,12 @@ const DashboardRibbon: React.FC<Props> = ({ user }) => {
         >
           New Delivery
         </button>
-        <NavLink
+        {/* <NavLink
           to="/profile"
           className="text-white py-3 px-6 bg-red-500 rounded-md hover:bg-red-400 ml-4"
         >
           Profile
-        </NavLink>
+        </NavLink> */}
         <AddDelivery showModal={showModal} setShowModal={setShowModal} />
       </div>
     </div>
