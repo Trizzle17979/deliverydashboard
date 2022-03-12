@@ -12,7 +12,7 @@ interface Props {
 
 const NavbarVertical: React.FC<Props> = ({ setShow }) => {
   return (
-    <nav className="w-60 m-8">
+    <nav className="w-72 m-8">
       <ul className="list-none p-0 m-0 flex flex-col items-center h-full">
         <li className="flex justify-center h-16 no-underline w-full">
           <div

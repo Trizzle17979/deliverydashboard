@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../../supabaseClient";
 import { Line } from "react-chartjs-2";
-import { Dropdown } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 import { DataArray } from "../../types";
 import { Chart, registerables } from "chart.js";
 
 Chart.register(...registerables);
 
-interface chartData {
+interface ChartData {
   labels: any[];
   datasets: any[];
 }
 
+interface Category {
+  title: string;
+  key: string;
+}
+
 const DashboardAnalytics: React.FC = () => {
   const [dataArr, setDataArr] = useState<DataArray[]>([]);
-  const [category, setCategory] = useState({
-    key: "totalPay",
+  const [category, setCategory] = useState<Category>({
     title: "Total Pay",
+    key: "totalPay",
   });
 
-  let chartDataset: chartData = {
+  let chartDataset: ChartData = {
     labels: [],
     datasets: [
       {
@@ -30,30 +33,6 @@ const DashboardAnalytics: React.FC = () => {
         borderColor: "#51cf66",
       },
     ],
-  };
-
-  const categoryOptions = [
-    { key: "totalPay", value: "totalPay", text: "Total Pay" },
-    { key: "netPay", value: "netPay", text: "Net Pay" },
-    { key: "netPayPerHour", value: "netPayPerHour", text: "Net Pay per Hour" },
-  ];
-
-  const categorySelectionHandler = (event: any, data: any) => {
-    let dataValue = data.value;
-    let dataTitle = data.options
-      .filter((option: any) => {
-        if (option.key === dataValue) {
-          return true;
-        } else {
-          return false;
-        }
-      })
-      .map((option: any) => {
-        return option.text;
-      });
-    console.log(dataValue);
-    console.log(dataTitle);
-    setCategory({ key: dataValue, title: dataTitle });
   };
 
   const getData = async () => {
@@ -89,22 +68,46 @@ const DashboardAnalytics: React.FC = () => {
     }
   }
 
+  const allButtons = "py-2 px-4 rounded-md";
+  const active = "text-white bg-green-500";
+  const inactive =
+    "text-green-500 border-2 border-green-500 hover:bg-green-500 hover:text-white";
+
   return (
-    <div className="">
-      <div className="">
-        <div className="">
-          <Dropdown
-            className=""
-            placeholder="Select Category"
-            defaultValue={category.key}
-            fluid
-            selection
-            options={categoryOptions}
-            onChange={categorySelectionHandler}
-          />
-        </div>
+    <div className="flex flex-col gap-8">
+      <div className="flex justify-around">
+        <button
+          onClick={() => {
+            setCategory({ title: "Total Pay", key: "totalPay" });
+          }}
+          className={`${allButtons} ${
+            category.key === "totalPay" ? active : inactive
+          }`}
+        >
+          Total Pay
+        </button>
+        <button
+          onClick={() => {
+            setCategory({ title: "Net Pay", key: "netPay" });
+          }}
+          className={`${allButtons} ${
+            category.key === "netPay" ? active : inactive
+          }`}
+        >
+          Net Pay
+        </button>
+        <button
+          onClick={() => {
+            setCategory({ title: "Net Pay per Hour", key: "netPayPerHour" });
+          }}
+          className={`${allButtons} ${
+            category.key === "netPayPerHour" ? active : inactive
+          }`}
+        >
+          Net Pay per Hour
+        </button>
       </div>
-      <div className="">
+      <div>
         <Line
           data={chartDataset}
           options={{
