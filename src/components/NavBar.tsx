@@ -18,6 +18,7 @@ const NavBar: React.FC<Props> = ({ dispatch }) => {
   const handleLogout = async () => {
     dispatch(logoutUser(false));
     supabase.auth.signOut();
+    setShowMenu(!showMenu);
     navigate("/");
   };
 
@@ -120,7 +121,6 @@ const NavBar: React.FC<Props> = ({ dispatch }) => {
             <button
               onClick={handleLogout}
               className="w-full text-center text-white py-3 px-6 rounded-md hover:bg-red-400"
-              onClick={handleShowMenu}
             >
               Logout
             </button>
