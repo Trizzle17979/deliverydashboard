@@ -29,7 +29,6 @@ const App: React.FC<Props> = ({ user, isLoggedIn, dispatch }) => {
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
-        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         {/* <Route path="/profile" element={<Profile session={session} />} /> */}

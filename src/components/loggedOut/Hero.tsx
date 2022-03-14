@@ -14,8 +14,8 @@ const Hero: React.FC<Props> = ({ learnMoreSection }) => {
   };
 
   return (
-    <div className="bg-blue-900 flex justify-between items-center px-24 py-36">
-      <div className="w-1/2 flex flex-col space-y-8">
+    <div className="bg-blue-900 flex md:flex-row gap-24 flex-col justify-between items-center md:px-24 md:py-36 px-16 py-16">
+      <div className="md:w-1/2 flex flex-col space-y-8">
         <p className="text-blue-100 font-mono">Modern dashboards & tracking</p>
         <h2 className="text-white font-bold text-4xl">
           Understand Your Earnings
