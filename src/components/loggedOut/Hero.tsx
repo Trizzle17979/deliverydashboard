@@ -40,7 +40,7 @@ const Hero: React.FC<Props> = ({ learnMoreSection }) => {
         </div>
       </div>
       <video
-        className="h-80 w-80 rounded-full shadow-lg hover:scale-105 transition"
+        className="md:h-80 md:w-80 h-56 w-56 rounded-full shadow-lg hover:scale-105 transition"
         autoPlay
         loop
         muted
