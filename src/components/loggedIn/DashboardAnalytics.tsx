@@ -75,6 +75,7 @@ const DashboardAnalytics: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-8">
+      <h2 className="text-2xl text-center mb-8">Analytics Dashboard</h2>
       <div className="flex justify-around">
         <button
           onClick={() => {

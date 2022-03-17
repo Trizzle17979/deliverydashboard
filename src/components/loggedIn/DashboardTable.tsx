@@ -75,9 +75,15 @@ const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
         >
           <td className="py-3 px-6">{delivery.delivery_date}</td>
           <td className="py-3 px-6">${delivery.total_pay}</td>
-          <td className="py-3 px-6">{delivery.total_orders}</td>
-          <td className="py-3 px-6">{delivery.total_miles} mi</td>
-          <td className="py-3 px-6">{delivery.total_mpg} mpg</td>
+          <td className="py-3 px-6 md:table-cell hidden">
+            {delivery.total_orders}
+          </td>
+          <td className="py-3 px-6 lg:table-cell hidden">
+            {delivery.total_miles} mi
+          </td>
+          <td className="py-3 px-6 lg:table-cell hidden">
+            {delivery.total_mpg} mpg
+          </td>
           <td className="py-3 px-6 text-blue-800">
             <button
               onClick={() => handleShowModal(delivery)}
@@ -102,7 +108,8 @@ const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
   }, [dataArr]);
 
   return (
-    <div className="flex justify-center items-center p-4">
+    <div className="flex flex-col justify-center items-center sm:px-16 px-8">
+      <h2 className="text-2xl text-center mb-8">Table Summary</h2>
       {loading ? (
         <h2>Loading...</h2>
       ) : (
@@ -111,9 +118,13 @@ const DashboardTable: React.FC<Props> = ({ dispatch, deliveryData }) => {
             <tr>
               <th className="py-3 bg-blue-800">Date</th>
               <th className="py-3 bg-blue-800">Total Pay</th>
-              <th className="py-3 bg-blue-800">Total Orders</th>
-              <th className="py-3 bg-blue-800">Total Miles</th>
-              <th className="py-3 bg-blue-800">MPG</th>
+              <th className="py-3 bg-blue-800 md:table-cell hidden">
+                Total Orders
+              </th>
+              <th className="py-3 bg-blue-800 lg:table-cell hidden">
+                Total Miles
+              </th>
+              <th className="py-3 bg-blue-800 lg:table-cell hidden">MPG</th>
               <th className="py-3 bg-blue-200 text-blue-800">Details</th>
               <th className="py-3 bg-blue-200 text-red-400">Delete</th>
             </tr>
