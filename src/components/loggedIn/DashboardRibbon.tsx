@@ -18,15 +18,15 @@ const DashboardRibbon: React.FC<Props> = ({ user }) => {
   return (
     <div className="flex flex-col gap-4 p-4">
       {user && (
-        <p className="flex justify-end">
+        <p className="flex sm:justify-end justify-center">
           Welcome {user.user_metadata?.first_name}{" "}
           {user.user_metadata?.last_name}
         </p>
       )}
-      <div className="flex justify-end mb-6">
+      <div className="flex sm:justify-end justify-center sm:mb-6 mb-16">
         <button
           onClick={handleShowModal}
-          className="text-white py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400"
+          className="text-white w-1/2 sm:w-auto py-3 px-6 bg-blue-500 rounded-md hover:bg-blue-400"
         >
           New Delivery
         </button>
