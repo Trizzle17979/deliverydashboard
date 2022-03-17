@@ -87,7 +87,7 @@ const DashboardHome: React.FC = () => {
   return (
     <div className="space-y-4 flex flex-col items-center">
       <h2 className="text-2xl mb-8">Home Dashboard</h2>
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid sm:grid-cols-3 grid-cols-2 gap-8">
         <div className="flex flex-col items-center p-4 text-center shadow-md rounded-md hover:scale-105">
           <img src="/bank.svg" className="w-6 h-6" />
           <p>Total Pay</p>
