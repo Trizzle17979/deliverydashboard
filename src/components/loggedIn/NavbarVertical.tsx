@@ -12,11 +12,11 @@ interface Props {
 
 const NavbarVertical: React.FC<Props> = ({ setShow }) => {
   return (
-    <nav className="w-72 m-8">
+    <nav className="md:w-72 m-8">
       <ul className="list-none p-0 m-0 flex flex-col items-center h-full">
         <li className="flex justify-center h-16 no-underline w-full">
           <div
-            className="flex hover:scale-110 cursor-pointer justify-center items-center gap-3"
+            className="flex hover:scale-110 cursor-pointer justify-center items-center gap-3 w-full"
             onClick={() => {
               setShow({
                 home: true,
@@ -31,7 +31,7 @@ const NavbarVertical: React.FC<Props> = ({ setShow }) => {
         </li>
         <li className="flex justify-center h-16 no-underline w-full">
           <div
-            className="flex hover:scale-110 cursor-pointer justify-center items-center gap-3"
+            className="flex hover:scale-110 cursor-pointer justify-center items-center gap-3 w-full"
             onClick={() => {
               setShow({
                 home: false,
@@ -46,7 +46,7 @@ const NavbarVertical: React.FC<Props> = ({ setShow }) => {
         </li>
         <li className="flex justify-center h-16 no-underline w-full">
           <div
-            className="flex hover:scale-110 cursor-pointer justify-center items-center gap-3"
+            className="flex hover:scale-110 cursor-pointer justify-center items-center gap-3 w-full"
             onClick={() => {
               setShow({
                 home: false,

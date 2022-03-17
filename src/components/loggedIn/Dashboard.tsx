@@ -27,7 +27,7 @@ const Dashboard: React.FC<Props> = ({ user }) => {
   });
 
   return (
-    <div className="flex">
+    <div className="flex md:flex-row flex-col">
       <NavbarVertical setShow={setShow} />
       <div className="px-4 py-4 min-h-screen w-full">
         <DashboardRibbon />
