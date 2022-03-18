@@ -50,7 +50,6 @@ const DashboardAnalytics: React.FC = () => {
 
   if (category.key === "totalPay") {
     for (let key in dataArr) {
-      console.log(dataArr[key]);
       chartDataset.labels.push(dataArr[key].delivery_date);
       chartDataset.datasets[0].data.push(dataArr[key].total_pay);
     }

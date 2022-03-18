@@ -89,47 +89,47 @@ const DashboardHome: React.FC = () => {
       <h2 className="text-2xl mb-8">Home Dashboard</h2>
       <div className="grid sm:grid-cols-3 grid-cols-2 gap-8">
         <div className="flex flex-col items-center p-4 text-center shadow-md rounded-md hover:scale-105">
-          <img src="/bank.svg" className="w-6 h-6" />
+          <img src="./src/assets/bank.svg" className="w-6 h-6" />
           <p>Total Pay</p>
           <p className="text-green-600">${values.sumTotalPay.toFixed(2)}</p>
         </div>
         <div className="flex flex-col items-center p-4 text-center shadow-md rounded-md hover:scale-105">
-          <img src="/moneybag.svg" className="w-6 h-6" />
+          <img src="./src/assets/moneybag.svg" className="w-6 h-6" />
           <p>Total Net Pay</p>
           <p className="text-green-600">${values.sumNetPay.toFixed(2)}</p>
         </div>
         <div className="flex flex-col items-center p-4 text-center shadow-md rounded-md hover:scale-105">
-          <img src="/moneybag.svg" className="w-6 h-6" />
+          <img src="./src/assets/moneybag.svg" className="w-6 h-6" />
           <p>Average Net $ / Hr</p>
           <p className="text-green-600">${values.avgNetPay.toFixed(2)}</p>
         </div>
         <div className="flex flex-col items-center p-4 text-center shadow-md rounded-md hover:scale-105">
-          <img src="/graph.svg" className="w-6 h-6" />
+          <img src="./src/assets/graph.svg" className="w-6 h-6" />
           <p>Total Orders</p>
           <p>{values.sumOrders.toFixed(0)}</p>
         </div>
         <div className="flex flex-col items-center p-4 text-center shadow-md rounded-md hover:scale-105">
-          <img src="/truck.svg" className="w-6 h-6" />
+          <img src="./src/assets/truck.svg" className="w-6 h-6" />
           <p>Average MPG</p>
           <p>{values.avgMpg.toFixed(1)} mpg</p>
         </div>
         <div className="flex flex-col items-center p-4 text-center shadow-md rounded-md hover:scale-105">
-          <img src="/car.svg" className="w-6 h-6" />
+          <img src="./src/assets/car.svg" className="w-6 h-6" />
           <p>Total Miles Driven</p>
           <p>{values.sumMiles.toFixed(1)} mi</p>
         </div>
         <div className="flex flex-col items-center p-4 text-center shadow-md rounded-md hover:scale-105">
-          <img src="/dollar.svg" className="w-6 h-6" />
+          <img src="./src/assets/dollar.svg" className="w-6 h-6" />
           <p>Total Gas Cost</p>
           <p className="text-red-600">${values.sumGasCost.toFixed(2)}</p>
         </div>
         <div className="flex flex-col items-center p-4 text-center shadow-md rounded-md hover:scale-105">
-          <img src="/dollar.svg" className="w-6 h-6" />
+          <img src="./src/assets/dollar.svg" className="w-6 h-6" />
           <p>Avg Gas Price</p>
           <p className="text-red-600">${values.avgGasPrice.toFixed(2)}</p>
         </div>
         <div className="flex flex-col items-center p-4 text-center shadow-md rounded-md hover:scale-105">
-          <img src="/dollar.svg" className="w-6 h-6" />
+          <img src="./src/assets/dollar.svg" className="w-6 h-6" />
           <p>Avg Cost per Order</p>
           <p className="text-red-600">${values.avgCostPerOrder.toFixed(2)}</p>
         </div>

@@ -25,7 +25,7 @@ const NavbarVertical: React.FC<Props> = ({ setShow }) => {
               });
             }}
           >
-            <img src="/home.svg" className="w-6 h-6" />
+            <img src="./src/assets/home.svg" className="w-6 h-6" />
             <h2 className="text-blue-900">Home</h2>
           </div>
         </li>
@@ -40,7 +40,7 @@ const NavbarVertical: React.FC<Props> = ({ setShow }) => {
               });
             }}
           >
-            <img src="/graph-white.svg" className="w-6 h-6 hover:scale-110" />
+            <img src="./src/assets/graph-white.svg" className="w-6 h-6 hover:scale-110" />
             <h2 className="text-blue-900">Analytics</h2>
           </div>
         </li>
@@ -55,7 +55,7 @@ const NavbarVertical: React.FC<Props> = ({ setShow }) => {
               });
             }}
           >
-            <img src="/table.svg" className="w-6 h-6 hover:scale-110" />
+            <img src="./src/assets/table.svg" className="w-6 h-6 hover:scale-110" />
             <h2 className="text-blue-900">Table</h2>
           </div>
         </li>
